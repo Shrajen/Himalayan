@@ -1,0 +1,52 @@
+.homepage_cour {
+    position: relative;
+}
+
+.home_img {
+    margin-top: 20px;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    filter: brightness(90%);
+}
+
+.home_sec1 {
+    position: absolute;
+    top: 127px;
+    left: 110px;
+}
+
+
+
+.home_btn1 {
+    background: #FFFFFF;
+    backdrop-filter: blur(80px);
+    border-radius: 4px;
+    text-align: center;
+    border: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 48px;
+    padding: 16px 32px;
+    color: #1D2130;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+   
+    .home_sec1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .home_img {
+        margin-top: 40px;
+
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+        
+    }
+}

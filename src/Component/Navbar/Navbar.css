@@ -1,0 +1,59 @@
+.navbar {
+    z-index: 2;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+  }
+#navbarNav {
+    margin-right: 110PX;
+}
+#navbar_img{
+   
+   height: 36px;
+
+}
+
+
+.nav_link{
+    border: 1px solid red;
+}
+
+.nav-link:focus {
+    outline: none !important;
+    }
+
+    .dropdown-menu{
+        border: 0px;
+    }
+@media screen and (min-width:400px) and (max-width:900){
+    #navbar_img{
+        height: 52px;
+    }
+}
+@media screen and (min-width:991px) {
+    .dropdown-menu{
+        font-size: 18px;
+    }
+    #navbar_img{
+        height: 56px;
+    }
+    .nav-link{
+        padding-top: 10px;
+        font-size: 16px;
+    }
+    #nav_7, #navbarDropdownMenuLink{
+        background-color: #0eeb62;
+        padding: 9px 32px;
+        color: white;
+        border-radius: 4px;
+        margin-left: 5px;
+    }
+    #nav_title {
+        font-size: 20px;
+padding-left: 10PX;   
+padding-top: 5PX; }
+    #navbar_img{
+        margin-left: 110px;
+    }
+}
