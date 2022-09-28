@@ -4,10 +4,9 @@
 
 .home_img {
     margin-top: 20px;
-    object-fit: cover;
+    object-fit: center;
     width: 100%;
-    height: auto;
-    filter: brightness(90%);
+height:270px;    filter: brightness(90%);
 }
 
 .home_sec1 {

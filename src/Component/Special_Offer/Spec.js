@@ -13,13 +13,13 @@ export default function Spec() {
 
         <div className="carousel-inner" id="homepage_cour">
             <div className="carousel-item active">
-                <img className="home_img" src="Images\spec3.jpg" alt="First slide"/>
+                <img className="home_img" src="Images\spec1.jpg" alt="First slide"/>
             </div>
             <div className="carousel-item">
                 <img className="home_img" src="Images\spec2.jpg" alt="Second slide"/>
             </div>
             <div className="carousel-item">
-                <img className="home_img" src="Images\spec3.jpg" alt="Third slide"/>
+                <img className="home_img" src="Images\spec1.jpg" alt="Third slide"/>
             </div>
 
         </div>

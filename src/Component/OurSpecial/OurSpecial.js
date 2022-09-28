@@ -5,199 +5,129 @@ import React from 'react'
 export default function OurSpecial() {
   return (
     
+ 
+    
+   <>
         <div className='ourspecial'>
         <section className="menu" id="menu">
     
         <h3 className="sub-heading"> our menu </h3>
         <h1 className="heading"> today's speciality </h1>
-    
-        <div className="box-container">
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-1.jpg" alt=""></img>
-                    <a href="#" className="fas fa-heart"></a>
-             </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-2.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-3.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-4.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-5.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-6.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-7.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-8.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
-            <div className="box">
-                <div className="image">
-                    <img src="images/menu-9.jpg" alt=""/>
-                    <a href="#" className="fas fa-heart"></a>
-                </div>
-                <div className="content">
-                    <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3>delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" className="btn">add to cart</a>
-                    <span className="price">$12.99</span>
-                </div>
-            </div>
-    
+        </section>
         </div>
-    
-    </section>
-    
+        <div className="container">
+        <div className="row">
+          <div className="col" id="OurSpec_grid">
+      
+          <div className="card" id="OurSpec_card">
+          <div className='OurSpec_icon'>
+          <table className='OurSpec_tab'>
+          <tr>
+          <td width="30px"> <a href="#" className="fas fa-shopping-cart fa-lg" id="topicon" ></a></td>
+          <td> <a href="#" className="fas fa-heart fa-lg topicon" id="topicon"></a></td>
+          </tr>
+          </table>
+          </div>
+          
+          
+          <img className="card-img-top" src='images/our_spec1.jpg' alt="Card image cap" id="OurSpec_img"/>
+          <div className="card-body">
+          <h5 className="card-title"><strong>Pizza</strong></h5>
+          <p className="card-text" id="OurSpec_p">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h6 id="OurSpec_h6"><strong>AU$ 5</strong></h6>
+          </div>
+          </div>    </div>
+          <div className="col" id="OurSpec_grid">
+      
+          <div className="card" id="OurSpec_card">
+          <div className='OurSpec_icon'>
+          <table className='OurSpec_tab'>
+          <tr>
+          <td width="30px"> <a href="#" className="fas fa-shopping-cart fa-lg" id="topicon" ></a></td>
+          <td> <a href="#" className="fas fa-heart fa-lg topicon" id="topicon"></a></td>
+          </tr>
+          </table>
+          </div>
+          
+          
+          <img className="card-img-top" src='images/our_spec1.jpg' alt="Card image cap" id="OurSpec_img"/>
+          <div className="card-body">
+          <h5 className="card-title"><strong>Pizza</strong></h5>
+          <p className="card-text" id="OurSpec_p">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h6 id="OurSpec_h6"><strong>AU$ 5</strong></h6>
+          </div>
+          </div>    </div>
+          <div className="col" id="OurSpec_grid">
+      
+          <div className="card" id="OurSpec_card">
+          <div className='OurSpec_icon'>
+          <table className='OurSpec_tab'>
+          <tr>
+          <td width="30px"> <a href="#" className="fas fa-shopping-cart fa-lg" id="topicon" ></a></td>
+          <td> <a href="#" className="fas fa-heart fa-lg topicon" id="topicon"></a></td>
+          </tr>
+          </table>
+          </div>
+          
+          
+          <img className="card-img-top" src='images/our_spec1.jpg' alt="Card image cap" id="OurSpec_img"/>
+          <div className="card-body">
+          <h5 className="card-title"><strong>Pizza</strong></h5>
+          <p className="card-text" id="OurSpec_p">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h6 id="OurSpec_h6"><strong>AU$ 5</strong></h6>
+          </div>
+          </div>    </div>
+          <div className="col" id="OurSpec_grid">
+      
+          <div className="card" id="OurSpec_card">
+          <div className='OurSpec_icon'>
+          <table className='OurSpec_tab'>
+          <tr>
+          <td width="30px"> <a href="#" className="fas fa-shopping-cart fa-lg" id="topicon" ></a></td>
+          <td> <a href="#" className="fas fa-heart fa-lg topicon" id="topicon"></a></td>
+          </tr>
+          </table>
+          </div>
+          
+          
+          <img className="card-img-top" src='images/our_spec1.jpg' alt="Card image cap" id="OurSpec_img"/>
+          <div className="card-body">
+          <h5 className="card-title"><strong>Pizza</strong></h5>
+          <p className="card-text" id="OurSpec_p">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h6 id="OurSpec_h6"><strong>AU$ 5</strong></h6>
+          </div>
+          </div>  </div>
+        <div className="col" id="OurSpec_grid">
+      
+        
+        <div className="card" id="OurSpec_card">
+        <div className='OurSpec_icon'>
+        <table className='OurSpec_tab'>
+        <tr>
+        <td width="30px"> <a href="#" className="fas fa-shopping-cart fa-lg" id="topicon" ></a></td>
+        <td> <a href="#" className="fas fa-heart fa-lg topicon" id="topicon"></a></td>
+        </tr>
+        </table>
         </div>
+        
+        
+        <img className="card-img-top" src='images/our_spec1.jpg' alt="Card image cap" id="OurSpec_img"/>
+        <div className="card-body">
+        <h5 className="card-title"><strong>Pizza</strong></h5>
+        <p className="card-text" id="OurSpec_p">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <h6 id="OurSpec_h6"><strong>AU$ 5</strong></h6>
+        </div>
+        </div></div>
+        </div>
+      </div>
+      
+      
+      
+       
+      
+      
+    </>
+ 
       
     
   )
