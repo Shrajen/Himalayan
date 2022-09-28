@@ -37,32 +37,27 @@ export default function Menu() {
             <div className="col-md-12 col-lg-6  ">
 
                 <table cellpadding="5px" style="width: 100%; background-color: antiquewhite;">
+{newproduct.map=(product,i)=>{
+    <tr data-toggle="modal" data-target="#exampleModalCenter" key={i}>
+    <td style=" width: 83%; ">
+        <p className="table_p1 ">${product[i].Title}</p>
+        <p className="table_p2 ">${product[i].Description}</p>
+    </td>
+    <td style="width: 13%; " className="table_totop ">
 
-                    <script>
-                            for (i = 0; i <= newproduct.length; i++) {
-                            document.write(`
-                            <tr data-toggle="modal" data-target="#exampleModalCenter">
-                        <td style=" width: 83%; ">
-                            <p className="table_p1 ">${newproduct[i].Title}</p>
-                            <p className="table_p2 ">${newproduct[i].Description}</p>
-                        </td>
-                        <td style="width: 13%; " className="table_totop ">
+        <span className="logo_middle ">Rs ${product[i].Price} </span>
 
-                            <span className="logo_middle ">Rs ${newproduct[i].Price} </span>
-
-                        </td>
-                        <td style="width: 5%; " className="table_totop ">
+    </td>
+    <td style="width: 5%; " className="table_totop ">
 
 
-                            <span className="material-symbols-outlined ">
-                                add_circle
-                                </span>
-                        </td>
+        <span className="material-symbols-outlined ">
+            add_circle
+            </span>
+    </td>
 
-                    </tr>`)
-                            }
-
-                        </script>
+</tr>
+}}
                
 
 
