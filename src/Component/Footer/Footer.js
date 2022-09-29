@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -8,54 +9,54 @@ export default function Footer() {
         <div className="box-container">
           <div className="box">
             <h3>locations</h3>
-            <a href="/">
+            <Link to="/">
               <strong>Inglewood</strong>
               <br />
               840 Beaufort Street Inglewood
-            </a>
-            <a href="/">
+            </Link>
+            <Link to="/">
               <strong>Victoria Park</strong>
               <br />
               419 Albany Highway Victoria Park{" "}
-            </a>
-            <a href="/">
+            </Link>
+            <Link to="/">
               <strong>Mosman Park</strong>
               <br />
               1/634 Stirling Highway Mosman Park
-            </a>
+            </Link>
           </div>
 
           <div className="box">
             <h3>quick links</h3>
-            <a href="#">home</a>
-            <a href="#">dishes</a>
-            <a href="#">about</a>
-            <a href="#">menu</a>
-            <a href="#">reivew</a>
-            <a href="#">order</a>
+            <Link to="#">home</Link>
+            <Link to="#">dishes</Link>
+            <Link to="#">about</Link>
+            <Link to="#">menu</Link>
+            <Link to="#">reivew</Link>
+            <Link to="#">order</Link>
           </div>
 
           <div className="box">
             <h3>contact info</h3>
-            <a href="#">
+            <Link to="#">
               +61 8 6161 9509<br></br>
               Inglewood
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="#">
               +61 8 6161 8645<br></br>
               Victoria Park
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="#">
               +61 8 6161 2290 <br></br>Mosman Park
-            </a>
+            </Link>
           </div>
 
           <div className="box">
             <h3>follow us</h3>
-            <a href="#">facebook</a>
-            <a href="#">twitter</a>
-            <a href="#">instagram</a>
-            <a href="#">linkedin</a>
+            <Link to="#">facebook</Link>
+            <Link to="#">twitter</Link>
+            <Link to="#">instagram</Link>
+            <Link to="#">linkedin</Link>
           </div>
         </div>
 
