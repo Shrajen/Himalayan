@@ -9,15 +9,16 @@ export default function Menu() {
   const [categories, setCategories] = useState([]);
   const [menus, setMenus] = useState([]);
   const [cart, setCart] = useState([]);
+  const [message, setMessage] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
 
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(1);
   const incNum = () => {
-    if (num < 10) {
+    if (num < 100) {
       setNum(Number(num) + 1);
     }
   };
@@ -132,7 +133,36 @@ export default function Menu() {
         </tbody>
       </>
     ));
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    const user = {
+      first_name: e.target.first.value,
+      last_name: e.target.last.value,
+      email: e.target.email.value,
+      address: e.target.address.value,
+      status: e.target.status.value,
+      order_date: e.target.date.value,
+      city: e.target.city.value,
+      tel_number: e.target.contact.value,
+      cost: { cartTotal },
+    };
+    axios
+      .post("orders/confirm-order", user, config)
+      .then(function(response) {
+        setMessage(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+  const msgDiv = message ? (
+    <div className="msg">
+      <span className="error-text">{message}</span>
+    </div>
+  ) : (
+    ""
+  );
   return (
     <div>
       <div className="container">
@@ -256,60 +286,83 @@ export default function Menu() {
           </Modal.Title>
         </Modal.Header>
 
-        <form role="form">
+        <form role="form" onSubmit={handleSubmit}>
           <Modal.Body>
-            <div class="form-group">
-              <label for="name">Name</label>
+            <div className="form-group">
+              <label for="name">First Name</label>
               <input
                 type="text"
-                class="form-control"
-                id="name"
+                className="form-control"
+                id="first"
                 placeholder="Full Name"
               />
             </div>
+            <div className="form-group">
+              <label for="name">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="last"
+                placeholder="Last Name"
+              />
+            </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="number">Number</label>
               <input
                 type="number"
-                class="form-control"
+                className="form-control"
                 id="number"
                 placeholder="Number"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="email">Email</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="email"
                 placeholder="Email"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="City">City</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="city"
                 placeholder="City"
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="address">Address</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="address"
                 placeholder="Address"
               />
             </div>
-
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" /> Check me out
-              </label>
+            <div className="form-group">
+              <label for="Status">Status</label>
+              <input
+                type="text"
+                className="form-control"
+                id="status"
+                placeholder="Status"
+              />
             </div>
+            <div className="form-group">
+              <label for="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                placeholder="Date"
+                className="form-control"
+              />
+            </div>
+            {msgDiv}
           </Modal.Body>
           <Modal.Footer>
             <Button className="download-btn" onClick={handleClose}>
