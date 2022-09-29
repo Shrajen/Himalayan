@@ -63,10 +63,13 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item ">
-              <Link className="nav-link " id="nav_7" to="/order-page"></Link>
-              <Link className="nav-link " id="nav_7" to="/menu1">
+              <Link className="nav-link " id="nav_7" to="/order-page">
+                {" "}
                 Order Now
               </Link>
+              {/* <Link className="nav-link " id="nav_7" to="/menu1">
+                Order Now
+              </Link> */}
             </li>
 
             <li className="nav-item dropdown">
