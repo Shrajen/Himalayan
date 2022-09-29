@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Modal, Row, Table } from "react-bootstrap";
-import Cart from "../Cart/Cart";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import "./Menu.css";
 import axios from "axios";
-import { Form } from "react-router-dom";
 
 export default function Menu() {
   const [categories, setCategories] = useState([]);
@@ -16,6 +14,21 @@ export default function Menu() {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const [num, setNum] = useState(0);
+  const incNum = () => {
+    if (num < 10) {
+      setNum(Number(num) + 1);
+    }
+  };
+  const decNum = () => {
+    if (num > 0) {
+      setNum(num - 1);
+    }
+  };
+  const handleChange = (e) => {
+    setNum(e.target.value);
+  };
 
   const config = {
     headers: {
@@ -73,7 +86,7 @@ export default function Menu() {
     const orders = {
       order_id: item.id,
       menu_id: item.id,
-      quantity: 3,
+      quantity: num,
     };
 
     axios
@@ -92,38 +105,33 @@ export default function Menu() {
     setCart(hardCopy);
   };
 
-  // const listItems = items.map((item) => (
-  //   <div key={item.id}>
-  //     {`${item.name}: $${item.price}`}
-  //     <input type="submit" value="add" onClick={() => addToCart(item)} />
-  //   </div>
-  // ));
-
-  const cartItems = cart.map((item) => (
-    <>
-      <tbody>
-        <tr key={item.id}>
-          <td>{item.name}</td>
-          <td>
-            {item.price}
-            <AiFillDelete
-              className="icon "
-              onClick={() => removeFromCart(item)}
-            />
-          </td>
-          <td>
-            <div className="cart-product-quantity">
-              <button onClick={() => console.log("hi")}>-</button>
-              <div className="count">
-                <span>t</span>
+  const cartItems =
+    cart.length > 0 &&
+    cart.map((item) => (
+      <>
+        <tbody>
+          <tr key={item.id}>
+            <td>{item.name}</td>
+            <td>
+              {item.price}
+              <AiFillDelete
+                className="icon "
+                onClick={() => removeFromCart(item)}
+              />
+            </td>
+            <td>
+              <div className="cart-product-quantity">
+                <button onClick={decNum}>-</button>
+                <div className="count">
+                  <span onChange={handleChange}>{num}</span>
+                </div>
+                <button onClick={incNum}>+</button>
               </div>
-              <button onClick={() => console.log("hiii")}>+</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </>
-  ));
+            </td>
+          </tr>
+        </tbody>
+      </>
+    ));
 
   return (
     <div>
