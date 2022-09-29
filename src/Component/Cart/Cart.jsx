@@ -53,7 +53,14 @@ const Cart = () => {
     </div>
   ));
 
-  return <></>;
+  return (
+    <>
+      <div>{listItems}</div>
+      <div>CART</div>
+      <div>{cartItems}</div>
+      <div>Total: ${cartTotal}</div>
+    </>
+  );
 };
 
 export default Cart;

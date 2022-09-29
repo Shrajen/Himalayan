@@ -15,7 +15,6 @@ const Home = () => {
       <Spec />
       <OurSpecial />
 
-      <Menu />
       <Footer />
     </>
   );
