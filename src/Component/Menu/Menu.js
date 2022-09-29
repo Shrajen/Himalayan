@@ -1,30 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table } from "react-bootstrap";
+import { Button, Card, Col, Modal, Row, Table } from "react-bootstrap";
 import Cart from "../Cart/Cart";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import "./Menu.css";
+import axios from "axios";
+import { Form } from "react-router-dom";
 
 export default function Menu() {
+  const [categories, setCategories] = useState([]);
+  const [menus, setMenus] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const items = [
-    {
-      id: 1,
-      name: "Burger",
-      price: 20,
+
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text-plain, */*",
+      "X-Requested-With": "XMLHttpRequest",
     },
-    {
-      id: 2,
-      name: "Pizza",
-      price: 32,
-    },
-    {
-      id: 3,
-      name: "Deserts",
-      price: 51,
-    },
-  ];
+  };
+
+  useEffect(() => {
+    axios
+      .get("categories")
+      .then(function(response) {
+        setCategories(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  });
+
+  useEffect(() => {
+    axios
+      .get("menus")
+      .then(function(response) {
+        setMenus(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+
+    axios
+      .get("orders/get-order-item")
+      .then(function(response) {
+        setCart(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  });
 
   useEffect(() => {
     total();
@@ -39,21 +69,35 @@ export default function Menu() {
   };
 
   const addToCart = (item) => {
-    setCart([...cart, item]);
+    // setCart([...cart, item]);
+    const orders = {
+      order_id: item.id,
+      menu_id: item.id,
+      quantity: 3,
+    };
+
+    axios
+      .post("orders/add-order-item", orders, config)
+      .then(function(response) {
+        setCart(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   };
 
-  const removeFromCart = (el) => {
+  const removeFromCart = (item) => {
     let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== item.id);
     setCart(hardCopy);
   };
 
-  const listItems = items.map((item) => (
-    <div key={item.id}>
-      {`${item.name}: $${item.price}`}
-      <input type="submit" value="add" onClick={() => addToCart(item)} />
-    </div>
-  ));
+  // const listItems = items.map((item) => (
+  //   <div key={item.id}>
+  //     {`${item.name}: $${item.price}`}
+  //     <input type="submit" value="add" onClick={() => addToCart(item)} />
+  //   </div>
+  // ));
 
   const cartItems = cart.map((item) => (
     <>
@@ -132,11 +176,9 @@ export default function Menu() {
             <div id="subMenu" className="d-none d-lg-block">
               <span>Categories</span>
               <ul className="list-unstyled">
-                <li>
-                  <a className="list-item-1" href="#list-item-2">
-                    My Favourites
-                  </a>
-                </li>
+                {categories.map((category, k) => (
+                  <li key={k}>{category.name}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -144,12 +186,12 @@ export default function Menu() {
             <Table responsive>
               <thead>
                 <tr>
-                  <th>Categories</th>
+                  <th>Menus</th>
                   <th>Prices</th>
                 </tr>
               </thead>
               <tbody>
-                {items.map((item) => (
+                {menus.map((item) => (
                   <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>
@@ -173,7 +215,7 @@ export default function Menu() {
                 <Table responsive>
                   <thead>
                     <tr>
-                      <th>Categories</th>
+                      <th>Food-items</th>
                       <th>Prices</th>
                       <th>Quantity</th>
                     </tr>
@@ -183,12 +225,95 @@ export default function Menu() {
               </Card.Body>
 
               <Card.Footer>
-                <div className="cart-total">Total: ${cartTotal}</div>
+                <Row>
+                  <Col md={6}>
+                    <div className="cart-total">Total: ${cartTotal}</div>
+                  </Col>
+                  <Col md={6}>
+                    <Button type="submit" onClick={handleShow}>
+                      Order
+                    </Button>
+                  </Col>
+                </Row>
               </Card.Footer>
             </Card>
           </div>
         </div>
       </div>
+
+      <Modal show={showModal} onHide={handleClose} size="md">
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <h4>Add Your Details</h4>
+          </Modal.Title>
+        </Modal.Header>
+
+        <form role="form">
+          <Modal.Body>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Full Name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="number">Number</label>
+              <input
+                type="number"
+                class="form-control"
+                id="number"
+                placeholder="Number"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="City">City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                placeholder="City"
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="Address"
+              />
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" /> Check me out
+              </label>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className="download-btn" onClick={handleClose}>
+              Submit
+            </Button>
+
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
     </div>
   );
 }

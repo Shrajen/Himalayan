@@ -64,7 +64,6 @@ export default function Navbar() {
             </li>
             <li className="nav-item ">
               <Link className="nav-link " id="nav_7" to="/order-page">
-                {" "}
                 Order Now
               </Link>
               {/* <Link className="nav-link " id="nav_7" to="/menu1">

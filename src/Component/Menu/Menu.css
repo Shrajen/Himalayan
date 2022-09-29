@@ -1,7 +1,7 @@
 .container .row .col-md-12 #subMenu span{
     font-size: 20px;
 }
-.container .row .col-md-12 #subMenu ul li a{
+.container .row .col-md-12 #subMenu ul li {
   text-decoration: none;
   font-size: 15px;
 }
@@ -22,6 +22,12 @@
 }
 .container .row .col-md-3 .card{
     font-size: 15px;
+}
+.container .row .col-md-3 .card .btn{
+    margin-top: 0;
+    padding: 5px;
+    border: none;
+    
 }
 .cart-product-quantity {
     display: flex;
