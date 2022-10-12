@@ -13,7 +13,7 @@ import Allroutes from "./Routes/Allroutes";
 import axios from "axios";
 
 function App() {
-  axios.defaults.baseURL = "http://192.168.1.69:80/api/";
+  axios.defaults.baseURL = "http://192.168.1.73:80/api/";
   return (
     <>
       <Allroutes />

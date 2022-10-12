@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Modal, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Form, Modal, Row, Table } from "react-bootstrap";
 import { GrAddCircle } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import "./Menu.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Menu() {
   const [categories, setCategories] = useState([]);
   const [menus, setMenus] = useState([]);
   const [cart, setCart] = useState([]);
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState();
   const [cartTotal, setCartTotal] = useState(0);
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
@@ -108,10 +110,11 @@ export default function Menu() {
 
   const cartItems =
     cart.length > 0 &&
-    cart.map((item) => (
+    cart.map((item, i) => (
       <>
         <tbody>
           <tr key={item.id}>
+            <td>{i + 1}</td>
             <td>{item.name}</td>
             <td>
               {item.price}
@@ -133,29 +136,69 @@ export default function Menu() {
         </tbody>
       </>
     ));
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    const user = {
-      first_name: e.target.first.value,
-      last_name: e.target.last.value,
-      email: e.target.email.value,
-      address: e.target.address.value,
-      status: e.target.status.value,
-      order_date: e.target.date.value,
-      city: e.target.city.value,
-      tel_number: e.target.contact.value,
-      cost: { cartTotal },
-    };
+  const [input, setInput] = useState({
+    first: "",
+    last: "",
+    email: "",
+    address: "",
+    action: "",
+    date: "",
+    city: "",
+    contact: "",
+    cost: "",
+  });
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // validateInput(e);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // const user = {
+    //   first_name: input.first,
+    //   last_name: input.last,
+    //   email: input.email,
+    //   address: input.address,
+    //   status: input.action,
+    //   order_date: input.date,
+    //   city: input.city,
+    //   tel_number: input.contact,
+    //   cost: input.cost,
+    // };
+    console.log("user");
     axios
-      .post("orders/confirm-order", user, config)
+      .post(
+        "orders/confirm-order",
+        {
+          first_name: input.first,
+          last_name: input.last,
+          email: input.email,
+          address: input.address,
+          status: input.action,
+          order_date: input.date,
+          city: input.city,
+          tel_number: input.contact,
+          cost: input.cost,
+        },
+        config
+      )
       .then(function(response) {
+        navigate("/");
         setMessage(response.data);
+        console.log(response.data);
       })
       .catch(function(error) {
         console.error(error);
       });
   };
+
   const msgDiv = message ? (
     <div className="msg">
       <span className="error-text">{message}</span>
@@ -253,6 +296,7 @@ export default function Menu() {
                 <Table responsive>
                   <thead>
                     <tr>
+                      <th>S.N</th>
                       <th>Food-items</th>
                       <th>Prices</th>
                       <th>Quantity</th>
@@ -286,94 +330,139 @@ export default function Menu() {
           </Modal.Title>
         </Modal.Header>
 
-        <form role="form" onSubmit={handleSubmit}>
-          <Modal.Body>
-            <div className="form-group">
-              <label for="name">First Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="first"
-                placeholder="Full Name"
-              />
-            </div>
-            <div className="form-group">
-              <label for="name">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="last"
-                placeholder="Last Name"
-              />
-            </div>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-12 mb-3">
+                <label for="name">First Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="first"
+                  placeholder="Full Name"
+                  name="first"
+                  value={input.first}
+                  onChange={onInputChange}
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <label for="name">Last Name</label>
+                <input
+                  type="text"
+                  onChange={onInputChange}
+                  className="form-control"
+                  id="last"
+                  name="last"
+                  placeholder="Last Name"
+                  value={input.last}
+                />
+              </div>
 
-            <div className="form-group">
-              <label for="number">Number</label>
-              <input
-                type="number"
-                className="form-control"
-                id="number"
-                placeholder="Number"
-              />
-            </div>
-            <div className="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Email"
-              />
-            </div>
-            <div className="form-group">
-              <label for="City">City</label>
-              <input
-                type="text"
-                className="form-control"
-                id="city"
-                placeholder="City"
-              />
-            </div>
-            <div className="form-group">
-              <label for="address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                placeholder="Address"
-              />
-            </div>
-            <div className="form-group">
-              <label for="Status">Status</label>
-              <input
-                type="text"
-                className="form-control"
-                id="status"
-                placeholder="Status"
-              />
-            </div>
-            <div className="form-group">
-              <label for="date">Date</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                placeholder="Date"
-                className="form-control"
-              />
-            </div>
-            {msgDiv}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button className="download-btn" onClick={handleClose}>
-              Submit
-            </Button>
+              <div className="col-12 mb-3">
+                <label for="number">Number</label>
+                <input
+                  type="number"
+                  onChange={onInputChange}
+                  className="form-control"
+                  id="contact"
+                  name="contact"
+                  placeholder="Number"
+                  value={input.contact}
+                />
+              </div>
 
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </form>
+              <div className="col-12 mb-3">
+                <label for="cost">Cost</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="cost"
+                  name="cost"
+                  value={input.cost}
+                  onChange={onInputChange}
+                  placeholder="Cost"
+                />
+              </div>
+
+              <div className="col-12 mb-3">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={input.email}
+                  onChange={onInputChange}
+                  placeholder="Email"
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <label for="City">City</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  name="city"
+                  value={input.city}
+                  onChange={onInputChange}
+                  placeholder="City"
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <label for="address">Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  name="address"
+                  onChange={onInputChange}
+                  value={input.address}
+                  placeholder="Address"
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <label for="Status">Status</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="status"
+                  name="action"
+                  value={input.action}
+                  onChange={onInputChange}
+                  placeholder="Status"
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <label for="date">Date</label>
+                <input
+                  type="datetime-local"
+                  id="date"
+                  name="date"
+                  placeholder="Date"
+                  onChange={onInputChange}
+                  value={input.date}
+                  className="form-control"
+                />
+              </div>
+              {msgDiv}
+
+              <div className="">
+                <Button
+                  className="m-auto d-block "
+                  variant="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
