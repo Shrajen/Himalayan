@@ -6,12 +6,14 @@ import "./Menu.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const myStorage = window.localStorage;
 export default function Menu() {
   const [categories, setCategories] = useState([]);
   const [menus, setMenus] = useState([]);
   const [cart, setCart] = useState([]);
   const [message, setMessage] = useState();
   const [cartTotal, setCartTotal] = useState(0);
+  const [orderId, setOrderId] = useState();
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
@@ -62,8 +64,20 @@ export default function Menu() {
         console.error(error);
       });
 
+    const order = myStorage.getItem("order_id");
+
     axios
-      .get("orders/get-order-item")
+      .get("orders/get-order-item/" + order, config)
+      // .get("orders/get-order-item", config)
+      .then(function(response) {
+        setCart(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+
+    axios
+      .get("orders/get-order-item", config)
       .then(function(response) {
         setCart(response.data);
       })
@@ -86,8 +100,25 @@ export default function Menu() {
 
   const addToCart = (item) => {
     // setCart([...cart, item]);
+    if (orderId < 0) {
+      axios
+        .get("orders/get-order-id")
+        .then(function(response) {
+          setOrderId(response.data);
+          console.log(orderId);
+          myStorage.setItem("orderId", orderId);
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    } else {
+      setOrderId(myStorage.getItem("orderId"));
+    }
+
+    const order_id = myStorage.getItem("orderId");
+
     const orders = {
-      order_id: item.id,
+      order_id: order_id,
       menu_id: item.id,
       quantity: num,
     };
@@ -96,6 +127,7 @@ export default function Menu() {
       .post("orders/add-order-item", orders, config)
       .then(function(response) {
         setCart(response.data);
+        console.log(cart);
       })
       .catch(function(error) {
         console.error(error);
@@ -103,10 +135,23 @@ export default function Menu() {
   };
 
   const removeFromCart = (item) => {
-    let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== item.id);
-    setCart(hardCopy);
+    const order_id = myStorage.getItem("orderId");
+    const item_id = item.id;
+    axios
+      .get("orders/" + order_id + "/remove-order-item/" + item_id)
+      .then(function(response) {
+        setCart(response.data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   };
+
+  // const removeFromCart = (item) => {
+  //   let hardCopy = [...cart];
+  //   hardCopy = hardCopy.filter((cartItem) => cartItem.id !== item.id);
+  //   setCart(hardCopy);
+  // };
 
   const cartItems =
     cart.length > 0 &&
@@ -115,11 +160,12 @@ export default function Menu() {
         <tbody>
           <tr key={item.id}>
             <td>{i + 1}</td>
+            <td>{item.id}</td>
             <td>{item.name}</td>
             <td>
               {item.price}
               <AiFillDelete
-                className="icon "
+                className="icon"
                 onClick={() => removeFromCart(item)}
               />
             </td>
@@ -173,6 +219,7 @@ export default function Menu() {
     //   cost: input.cost,
     // };
     console.log("user");
+    const order_id = myStorage.getItem("orderId");
     axios
       .post(
         "orders/confirm-order",
@@ -187,10 +234,13 @@ export default function Menu() {
           tel_number: input.contact,
           cost: input.cost,
         },
+        order_id,
         config
       )
       .then(function(response) {
         navigate("/");
+        myStorage.removeItem("order_id");
+        window.location.reload();
         setMessage(response.data);
         console.log(response.data);
       })
@@ -211,7 +261,7 @@ export default function Menu() {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-12 col-lg-2 ">
-            <aside className="sidebar col-lg-3 ml-auto">
+            {/* <aside className="sidebar col-lg-3 ml-auto">
               <p className="border-top pt-3 d-block d-lg-none">
                 <strong>Category</strong>
               </p>
@@ -253,7 +303,7 @@ export default function Menu() {
                   <span>Chicken Sandwiches(Burgers)</span>
                 </option>
               </select>
-            </aside>
+            </aside> */}
             <div id="subMenu" className="d-none d-lg-block">
               <span>Categories</span>
               <ul className="list-unstyled">
