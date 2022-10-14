@@ -100,22 +100,22 @@ export default function Menu() {
 
   const addToCart = (item) => {
     // setCart([...cart, item]);
-    if (orderId < 0) {
-      axios
-        .get("orders/get-order-id")
-        .then(function(response) {
-          setOrderId(response.data);
-          console.log(orderId);
-          myStorage.setItem("orderId", orderId);
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
-    } else {
-      setOrderId(myStorage.getItem("orderId"));
-    }
+    // if (orderId === null && orderId === undefined) {
+    axios
+      .get("orders/get-order-id")
+      .then(function(response) {
+        setOrderId(response.data);
+        JSON.parse(myStorage.setItem("orderId", orderId));
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+    // } else {
+    //   setOrderId(myStorage.getItem("orderId"));
+    // }
 
     const order_id = myStorage.getItem("orderId");
+    console.log(order_id);
 
     const orders = {
       order_id: order_id,
@@ -160,7 +160,7 @@ export default function Menu() {
         <tbody>
           <tr key={item.id}>
             <td>{i + 1}</td>
-            <td>{item.id}</td>
+
             <td>{item.name}</td>
             <td>
               {item.price}
@@ -192,7 +192,6 @@ export default function Menu() {
     date: "",
     city: "",
     contact: "",
-    cost: "",
   });
 
   const onInputChange = (e) => {
@@ -207,17 +206,6 @@ export default function Menu() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // const user = {
-    //   first_name: input.first,
-    //   last_name: input.last,
-    //   email: input.email,
-    //   address: input.address,
-    //   status: input.action,
-    //   order_date: input.date,
-    //   city: input.city,
-    //   tel_number: input.contact,
-    //   cost: input.cost,
-    // };
     console.log("user");
     const order_id = myStorage.getItem("orderId");
     axios
@@ -232,21 +220,24 @@ export default function Menu() {
           order_date: input.date,
           city: input.city,
           tel_number: input.contact,
-          cost: input.cost,
+          cost: { cartTotal },
+          order_id: order_id,
         },
-        order_id,
         config
       )
       .then(function(response) {
-        navigate("/");
-        myStorage.removeItem("order_id");
-        window.location.reload();
+        // navigate("/");
+        // myStorage.removeItem("order_id");
+        // window.location.reload();
         setMessage(response.data);
         console.log(response.data);
       })
       .catch(function(error) {
         console.error(error);
       });
+    navigate("/");
+    myStorage.removeItem("order_id");
+    window.location.reload();
   };
 
   const msgDiv = message ? (
@@ -359,7 +350,7 @@ export default function Menu() {
               <Card.Footer>
                 <Row>
                   <Col md={6}>
-                    <div className="cart-total">Total: ${cartTotal}</div>
+                    <div className="cart-total">Total: {cartTotal}</div>
                   </Col>
                   <Col md={6}>
                     <Button type="submit" onClick={handleShow}>
@@ -421,7 +412,7 @@ export default function Menu() {
                 />
               </div>
 
-              <div className="col-12 mb-3">
+              {/* <div className="col-12 mb-3">
                 <label for="cost">Cost</label>
                 <input
                   type="number"
@@ -432,7 +423,7 @@ export default function Menu() {
                   onChange={onInputChange}
                   placeholder="Cost"
                 />
-              </div>
+              </div> */}
 
               <div className="col-12 mb-3">
                 <label for="email">Email</label>
