@@ -226,18 +226,15 @@ export default function Menu() {
         config
       )
       .then(function(response) {
-        // navigate("/");
-        // myStorage.removeItem("order_id");
-        // window.location.reload();
+        navigate("/");
+        myStorage.removeItem("order_id");
+        window.location.reload();
         setMessage(response.data);
         console.log(response.data);
       })
       .catch(function(error) {
         console.error(error);
       });
-    navigate("/");
-    myStorage.removeItem("order_id");
-    window.location.reload();
   };
 
   const msgDiv = message ? (

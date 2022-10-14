@@ -4,6 +4,7 @@ import Navbar from "../../Component/Navbar/Navbar";
 import Spec from "../../Component/Special_Offer/Spec";
 import OurSpecial from "../../Component/OurSpecial/OurSpecial";
 import Footer from "../../Component/Footer/Footer";
+import Category from "../../Component/Category/Category";
 // import Menu from "../../Component/Menu/Menu";
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
 
       <Spec />
       <OurSpecial />
-
+      <Category />
       <Footer />
     </>
   );
