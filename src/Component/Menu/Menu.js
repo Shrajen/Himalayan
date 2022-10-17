@@ -40,6 +40,7 @@ export default function Menu() {
       "Content-Type": "application/json",
       Accept: "application/json, text-plain, */*",
       "X-Requested-With": "XMLHttpRequest",
+      "Access-Control-Allow-Origin": "*",
     },
   };
 
@@ -160,7 +161,6 @@ export default function Menu() {
         <tbody>
           <tr key={item.id}>
             <td>{i + 1}</td>
-
             <td>{item.name}</td>
             <td>
               {item.price}
@@ -205,26 +205,21 @@ export default function Menu() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log("user");
     const order_id = myStorage.getItem("orderId");
     axios
-      .post(
-        "orders/confirm-order",
-        {
-          first_name: input.first,
-          last_name: input.last,
-          email: input.email,
-          address: input.address,
-          status: input.action,
-          order_date: input.date,
-          city: input.city,
-          tel_number: input.contact,
-          cost: { cartTotal },
-          order_id: order_id,
-        },
-        config
-      )
+      .post("orders/confirm-order", {
+        first_name: input.first,
+        last_name: input.last,
+        email: input.email,
+        address: input.address,
+        status: input.action,
+        order_date: input.date,
+        city: input.city,
+        tel_number: input.contact,
+        cost: { cartTotal },
+        order_id: order_id,
+      })
       .then(function(response) {
         navigate("/");
         myStorage.removeItem("order_id");
